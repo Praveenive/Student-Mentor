@@ -35,14 +35,14 @@ router.post("/students", async(req,res)=>{
 
 
 // QN0 3)
-router.put("/assign-mentor/:mentor_id/stud/:id", async (req, res)=> {
+router.put("/assign-mentor/:id/", async (req, res)=> {
         try {
             if(req.query.mentor_Id){
                 req.query.mentor_Id = +req.query.mentor_Id;
             }
-         const {  mentor_id,id } =req.params;
+         const {  id } =req.params;
          const updatedMentorData = req.body;
-         if(!id || !mentor_id){
+         if(!id ){
             res.status(400).json({data:"404"})
          }
          const result = await assigningMentor(id,updatedMentorData)
@@ -56,7 +56,7 @@ router.get("/notassignstudents", async(req,res)=>{
     try {
         const notAssigned = await getNotassignedStudents(req);
         // const notAssigned = await getNotassignedStudents(req)
-        console.log(notAssigned);
+        console.log(notAssigned.length);
         let studentsWithoutMentor = [];
         for (let i = 0; i < notAssigned.length; i++) {
             if (!notAssigned[i].mentor_Id || notAssigned[i].mentor_Id.length === 0) {
