@@ -6,6 +6,9 @@ const app = express()
 
 app.use(express.json());
 
+app.get("/stu-men", (req,res)=>{
+    res.send("Welcome to Student-Mentor Application ")
+})
 app.use("/stu-men",studentRouter)
 
 
